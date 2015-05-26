@@ -32,6 +32,7 @@ module.exports = getUnreleased = function (version, cwd, repo, cb) {
       if (err) { return cb(err); }
 
       output += format('## [%s] -%s\n\n', version, tagDateAsString);
+      output += format('### Fixed\n\n', version, tagDateAsString);
 
       var str = 'git --no-pager log --pretty="format:- [] %%s (\\`%%an\\`)%%n  https://github.com/%s/commit/%H" "%s..HEAD"';
       str = format(str, repo, lastTag);
