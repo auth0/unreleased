@@ -1,6 +1,6 @@
 {
   "name": "unreleased",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Converts last commits to changelog entries.",
   "main": "index.js",
   "scripts": {
