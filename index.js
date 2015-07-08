@@ -51,7 +51,7 @@ var getUnreleased;
 
 module.exports = getUnreleased = function (version, cwd, repo, cb) {
   // Update tags from remote
-  exec('git fetch --tags', function (err, stdout, stderr) {
+  exec('git fetch --tags', {cwd: cwd}, function (err, stdout, stderr) {
     if (err) { return cb(err); }
 
     getAllTags(version, cwd, repo, cb);
