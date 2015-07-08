@@ -14,8 +14,8 @@ function getTagDate(tag, cb) {
   });
 }
 
-module.exports = getUnreleased = function (version, cwd, repo, cb) {
-  // Get all existing tags ordered descending on date
+// Get all existing tags ordered descending on date
+function getAllTags(version, cwd, repo, cb) {
   var str = 'git for-each-ref --format="%(tag)" --sort=\'*authordate\' refs/tags | sed \'1!G;h;$!d\'';
   exec(str, {cwd: cwd}, function (err, stdout, stderr) {
 
@@ -44,6 +44,17 @@ module.exports = getUnreleased = function (version, cwd, repo, cb) {
         return cb(null, output);
       });
     });
+  });
+}
+
+var getUnreleased;
+
+module.exports = getUnreleased = function (version, cwd, repo, cb) {
+  // Update tags from remote
+  exec('git fetch --tags', function (err, stdout, stderr) {
+    if (err) { return cb(err); }
+
+    getAllTags(version, cwd, repo, cb);
   });
 };
 
